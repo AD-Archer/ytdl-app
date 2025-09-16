@@ -101,7 +101,9 @@ jobs:
       run: |
         mv artifacts/ytdl-app-linux/main artifacts/ytdl-app-linux/ytdl-app-linux
         mv artifacts/ytdl-app-windows/main.exe artifacts/ytdl-app-windows/ytdl-app-windows.exe
-        mv artifacts/ytdl-app-macos/main artifacts/ytdl-app-macos/ytdl-app-macos
+        mv artifacts/ytdl-app-macos/main.app artifacts/ytdl-app-macos/ytdl-app-macos.app
+        # Remove the standalone executable since we're using the .app bundle
+        rm -f artifacts/ytdl-app-macos/main
 
     - name: Create instruction files
       run: |
@@ -176,15 +178,15 @@ jobs:
         Source Code (verify safety): https://github.com/AD-Archer/ytdl-app/blob/master/main.py
         
         How to run:
-        1. Right-click ytdl-app-macos and select "Open" (don't double-click!)
+        1. Double-click ytdl-app-macos.app to launch the application
         
         If macOS shows "cannot be opened because it is from an unidentified developer":
+        - Right-click ytdl-app-macos.app and select "Open"
+        - Click "Open" in the confirmation dialog
+        
+        Alternative: System Preferences method:
         - Go to System Preferences → Security & Privacy → General
         - Click "Open Anyway" next to the blocked app message
-        
-        Alternative method:
-        - Open Terminal in this folder
-        - Run: chmod +x ytdl-app-macos && ./ytdl-app-macos
         
         This app is safe - you can view the source code at the GitHub link above!
         Enjoy downloading YouTube videos!
