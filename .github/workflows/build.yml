@@ -60,6 +60,14 @@ jobs:
       run: |
         pyinstaller --onefile --windowed main.py
 
+    - name: Fix macOS app permissions (macOS only)
+      if: matrix.os == 'macos-latest'
+      run: |
+        # Ensure the .app bundle has proper permissions
+        chmod +x dist/main.app/Contents/MacOS/main
+        # List the .app contents for debugging
+        ls -la dist/main.app/Contents/MacOS/
+
     - name: List build output (Linux/macOS)
       if: matrix.os != 'windows-latest'
       run: |
@@ -102,6 +110,8 @@ jobs:
         mv artifacts/ytdl-app-linux/main artifacts/ytdl-app-linux/ytdl-app-linux
         mv artifacts/ytdl-app-windows/main.exe artifacts/ytdl-app-windows/ytdl-app-windows.exe
         mv artifacts/ytdl-app-macos/main.app artifacts/ytdl-app-macos/ytdl-app-macos.app
+        # Ensure proper permissions are preserved
+        chmod +x artifacts/ytdl-app-macos/ytdl-app-macos.app/Contents/MacOS/main
         # Remove the standalone executable since we're using the .app bundle
         rm -f artifacts/ytdl-app-macos/main
 
