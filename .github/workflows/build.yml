@@ -5,8 +5,6 @@ on:
     branches: [ master, main ]
     tags:
       - 'v*'
-  pull_request:
-    branches: [ master, main ]
   workflow_dispatch:
 
 permissions:
@@ -99,11 +97,107 @@ jobs:
         echo "macOS contents:"
         ls -la artifacts/ytdl-app-macos/
 
+    - name: Rename executables for release
+      run: |
+        mv artifacts/ytdl-app-linux/main artifacts/ytdl-app-linux/ytdl-app-linux
+        mv artifacts/ytdl-app-windows/main.exe artifacts/ytdl-app-windows/ytdl-app-windows.exe
+        mv artifacts/ytdl-app-macos/main artifacts/ytdl-app-macos/ytdl-app-macos
+
+    - name: Create instruction files
+      run: |
+        # Linux instructions
+        cat > artifacts/ytdl-app-linux/README-LINUX.txt << 'EOF'
+        YouTube Downloader for Linux
+        ============================
+        Made by Antonio Archer
+        Website: antonioarcher.com
+        Contact: adarcher.app
+        Email: antonioarcher.dev@gmail.com
+        
+        Source Code (verify safety): https://github.com/AD-Archer/ytdl-app/blob/master/main.py
+        
+        How to run:
+        
+        Method 1 - Terminal (Recommended):
+        1. Open Terminal in this folder
+        2. Make the file executable: chmod +x ytdl-app-linux
+        3. Run the app: ./ytdl-app-linux
+        
+        Method 2 - File Manager (GUI):
+        1. Right-click on ytdl-app-linux
+        2. Select "Properties" or "Permissions"
+        3. Check "Allow executing file as program" or "Executable"
+        4. Double-click the file to run
+        
+        If you get "Permission denied":
+        - Run: chmod +x ytdl-app-linux
+        - Then: ./ytdl-app-linux
+        
+        This app is safe - you can view the source code at the GitHub link above!
+        Enjoy downloading YouTube videos!
+        EOF
+        
+        # Windows instructions
+        cat > artifacts/ytdl-app-windows/README-WINDOWS.txt << 'EOF'
+        YouTube Downloader for Windows
+        ==============================
+        Made by Antonio Archer
+        Website: antonioarcher.com
+        Contact: adarcher.app
+        Email: antonioarcher.dev@gmail.com
+        
+        Source Code (verify safety): https://github.com/AD-Archer/ytdl-app/blob/master/main.py
+        
+        How to run:
+        1. Double-click ytdl-app-windows.exe
+        
+        If Windows shows "Windows protected your PC":
+        - Click "More info"
+        - Click "Run anyway"
+        
+        Alternative method:
+        - Right-click the .exe file
+        - Properties → Unblock → OK
+        - Then double-click to run
+        
+        This app is safe - you can view the source code at the GitHub link above!
+        Enjoy downloading YouTube videos!
+        EOF
+        
+        # macOS instructions
+        cat > artifacts/ytdl-app-macos/README-MACOS.txt << 'EOF'
+        YouTube Downloader for macOS
+        ============================
+        Made by Antonio Archer
+        Website: antonioarcher.com
+        Contact: adarcher.app
+        Email: antonioarcher.dev@gmail.com
+        
+        Source Code (verify safety): https://github.com/AD-Archer/ytdl-app/blob/master/main.py
+        
+        How to run:
+        1. Right-click ytdl-app-macos and select "Open" (don't double-click!)
+        
+        If macOS shows "cannot be opened because it is from an unidentified developer":
+        - Go to System Preferences → Security & Privacy → General
+        - Click "Open Anyway" next to the blocked app message
+        
+        Alternative method:
+        - Open Terminal in this folder
+        - Run: chmod +x ytdl-app-macos && ./ytdl-app-macos
+        
+        This app is safe - you can view the source code at the GitHub link above!
+        Enjoy downloading YouTube videos!
+        EOF
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          artifacts/ytdl-app-linux/main
-          artifacts/ytdl-app-windows/main.exe
-          artifacts/ytdl-app-macos/main
+          artifacts/ytdl-app-linux/ytdl-app-linux
+          artifacts/ytdl-app-linux/README-LINUX.txt
+          artifacts/ytdl-app-windows/ytdl-app-windows.exe
+          artifacts/ytdl-app-windows/README-WINDOWS.txt
+          artifacts/ytdl-app-macos/ytdl-app-macos
+          artifacts/ytdl-app-macos/README-MACOS.txt
         generate_release_notes: true
