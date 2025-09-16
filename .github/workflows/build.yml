@@ -202,6 +202,15 @@ jobs:
         Enjoy downloading YouTube videos!
         EOF
 
+    - name: Verify files before ZIP creation
+      run: |
+        echo "=== Linux folder contents ==="
+        ls -la artifacts/ytdl-app-linux/
+        echo "=== Windows folder contents ==="
+        ls -la artifacts/ytdl-app-windows/
+        echo "=== macOS folder contents ==="
+        ls -la artifacts/ytdl-app-macos/
+
     - name: Create ZIP files
       run: |
         cd artifacts
