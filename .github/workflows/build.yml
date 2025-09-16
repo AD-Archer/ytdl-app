@@ -190,14 +190,26 @@ jobs:
         Enjoy downloading YouTube videos!
         EOF
 
+    - name: Create ZIP files
+      run: |
+        cd artifacts
+        
+        # Linux ZIP
+        zip -r linux.zip ytdl-app-linux/
+        
+        # Windows ZIP (using PowerShell)
+        powershell -Command "Compress-Archive -Path ytdl-app-windows -DestinationPath windows.zip"
+        
+        # macOS ZIP  
+        zip -r mac.zip ytdl-app-macos/
+        
+        ls -la *.zip
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          artifacts/ytdl-app-linux/ytdl-app-linux
-          artifacts/ytdl-app-linux/README-LINUX.txt
-          artifacts/ytdl-app-windows/ytdl-app-windows.exe
-          artifacts/ytdl-app-windows/README-WINDOWS.txt
-          artifacts/ytdl-app-macos/ytdl-app-macos
-          artifacts/ytdl-app-macos/README-MACOS.txt
+          artifacts/linux.zip
+          artifacts/windows.zip
+          artifacts/mac.zip
         generate_release_notes: true
