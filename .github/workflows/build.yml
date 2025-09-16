@@ -90,13 +90,20 @@ jobs:
         path: artifacts/
 
     - name: Display structure of downloaded files
-      run: ls -la artifacts/
+      run: |
+        ls -la artifacts/
+        echo "Linux contents:"
+        ls -la artifacts/ytdl-app-linux/
+        echo "Windows contents:"
+        ls -la artifacts/ytdl-app-windows/
+        echo "macOS contents:"
+        ls -la artifacts/ytdl-app-macos/
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          artifacts/ytdl-app-linux/*
-          artifacts/ytdl-app-windows/*
-          artifacts/ytdl-app-macos/*
+          artifacts/ytdl-app-linux/main
+          artifacts/ytdl-app-windows/main.exe
+          artifacts/ytdl-app-macos/main
         generate_release_notes: true
