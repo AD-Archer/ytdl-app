@@ -193,16 +193,9 @@ jobs:
     - name: Create ZIP files
       run: |
         cd artifacts
-        
-        # Linux ZIP
         zip -r linux.zip ytdl-app-linux/
-        
-        # Windows ZIP (using PowerShell)
-        powershell -Command "Compress-Archive -Path ytdl-app-windows -DestinationPath windows.zip"
-        
-        # macOS ZIP  
+        zip -r windows.zip ytdl-app-windows/
         zip -r mac.zip ytdl-app-macos/
-        
         ls -la *.zip
 
     - name: Create Release
