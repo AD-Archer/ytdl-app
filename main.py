@@ -53,11 +53,13 @@ class YTDLApp:
         path_label.pack(side=tk.LEFT)
         path_entry = tk.Entry(path_frame, textvariable=self.download_path, width=30, font=("Arial", 10))
         path_entry.pack(side=tk.LEFT, padx=10)
-        browse_button = tk.Button(path_frame, text="Browse", command=self.browse_path, font=("Arial", 10))
+        browse_button = tk.Button(path_frame, text="Browse", command=self.browse_path, font=("Arial", 10), 
+                                bg="#2196F3", fg="white", padx=10, pady=5, relief="raised", cursor="hand2")
         browse_button.pack(side=tk.LEFT)
 
         # Download Button
-        download_button = tk.Button(self.root, text="Download", command=self.download, font=("Arial", 14, "bold"), bg="#4CAF50", fg="white", padx=20, pady=10)
+        download_button = tk.Button(self.root, text="Download", command=self.download, font=("Arial", 14, "bold"), 
+                                  bg="#4CAF50", fg="white", padx=20, pady=10, relief="raised", cursor="hand2")
         download_button.pack(pady=20)
 
         # Status Label

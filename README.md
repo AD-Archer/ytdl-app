@@ -19,12 +19,37 @@ A simple, user-friendly GUI application for downloading YouTube videos with qual
 
 ### For Users (Just want to download)
 
-1. Download the latest executable from [Releases](../../releases)
-2. Double-click to run (or `./ytdl-app` on Linux/macOS)
-3. Enter a YouTube URL
-4. Select your preferred quality
-5. Choose download location
-6. Click Download!
+1. **Download the latest executable from [Releases](../../releases)**
+   - Choose your platform: `ytdl-app-windows.zip`, `ytdl-app-macos.zip`, or `ytdl-app-linux.zip`
+
+2. **Extract and run based on your platform:**
+
+   **🪟 Windows:**
+   - Extract the ZIP file
+   - Double-click `main.exe`
+   - If Windows shows "Windows protected your PC" warning:
+     - Click "More info" → "Run anyway"
+     - Or right-click the file → Properties → Unblock → OK
+
+   **🍎 macOS:**
+   - Extract the ZIP file
+   - Right-click `main` → "Open" (don't double-click!)
+   - If macOS shows "cannot be opened because it is from an unidentified developer":
+     - Go to System Preferences → Security & Privacy → General
+     - Click "Open Anyway" next to the blocked app message
+   - Alternative: Run in Terminal: `chmod +x main && ./main`
+
+   **🐧 Linux:**
+   - Extract the ZIP file
+   - Open Terminal in the extracted folder
+   - Make executable: `chmod +x main`
+   - Run: `./main`
+
+3. **Use the app:**
+   - Enter a YouTube URL
+   - Select your preferred quality  
+   - Choose download location
+   - Click Download!
 
 ### For Developers (Want to build/modify)
 
@@ -77,6 +102,24 @@ pyinstaller --onefile main.py
 - Uses yt-dlp for robust YouTube downloading
 - Single executable created with PyInstaller
 - Supports all yt-dlp format options
+
+## 🚨 Troubleshooting
+
+### "App can't be opened" (macOS)
+- **Solution**: Right-click the file and select "Open" instead of double-clicking
+- **Alternative**: System Preferences → Security & Privacy → General → "Open Anyway"
+
+### "Windows protected your PC" (Windows)
+- **Solution**: Click "More info" → "Run anyway"
+- **Alternative**: Right-click file → Properties → Unblock → OK
+
+### "Permission denied" (Linux)
+- **Solution**: Run `chmod +x main` first, then `./main`
+
+### App won't start
+- Make sure you downloaded the correct version for your operating system
+- Try running from Terminal/Command Prompt to see error messages
+- Ensure you have an internet connection for downloading videos
 
 ## 🤝 Contributing
 
